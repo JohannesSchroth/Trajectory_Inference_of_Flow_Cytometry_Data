@@ -3,10 +3,11 @@
 
 #Diffusion Pseutotime using the Destiny R Package
 
+install.packages('~/Downloads/destiny-3.1.0.tar.gz', repos = NULL, type = 'source')
 
 packages_1 <- c('cytofkit', 'flowViz', 'ggcyto', 'gridExtra','grid', 'ggplot2', 'flowCore',
                 'umap', 'dplyr', 'reshape', 'RColorBrewer', 'FlowSOM', 'Rtsne',
-                'ConsensusClusterPlus', 'ggdendro', 'plotly', 'shiny', 'plotly', 'monocle3')
+                'ConsensusClusterPlus', 'ggdendro', 'plotly', 'shiny', 'plotly', 'destiny')
 lapply(packages_1, library, character.only=TRUE)
 
 all_fcs <- read.FCS(filename = '/Users/johannesschroth/Desktop/iEMRA clustering stuff/CD4_1.fcs')
