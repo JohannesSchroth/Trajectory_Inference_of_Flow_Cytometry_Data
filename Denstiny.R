@@ -50,30 +50,33 @@ d <- na.omit(d)
 d <- d[d$slingPseudotime_1 > 0,]
 d <- d[d$slingPseudotime_1 < max(d$slingPseudotime_1),]
 
-head(cbind(dpt$DPT1,dpt$DPT2))
-
-head(d)
-
 dat['dpt_pseudotime'] <- rank(dpt$dpt)
 dat['branch'] <- dpt$Branch
 
-length(dpt$dpt)
+dat$Clusters <- as.numeric(dat$Clusters)
+dat['Merged_Clusters'] <- NA
+head(dat)
+dat[dat$Clusters == 8,19] <- 'Naive CCR7+'
+dat[dat$Clusters == 10,19] <- 'Naive CCR7+'
+dat[dat$Clusters == 3,19] <- 'EMRA KLRG1+'
+dat[dat$Clusters == 5,19] <- 'EMRA KLRG1+'
+dat[dat$Clusters == 1,19] <- 'CM CCR7+' 
+dat[dat$Clusters == 6,19] <- 'CM CCR7+' 
+dat[dat$Clusters == 2,19] <- 'Naive CCR7-'
+dat[dat$Clusters == 4,19] <- 'EM' 
+dat[dat$Clusters == 7,19] <- 'CM CCR7+' 
+dat[dat$Clusters == 9,19] <- 'iEMRA KLRG1-' 
 
-length(rank(na.omit(slingPseudotime(sce_all))))
-
-dpt$Branch
-eigenvalues(dm)
-
-ggplot(dat, aes(dat$dpt_pseudotime, as.factor(Clusters), colour = as.factor(Clusters))) +
-    geom_quasirandom(groupOnX = FALSE)
+ggplot(dat, aes(dat$dpt_pseudotime, Merged_Clusters, colour = Merged_Clusters)) +
+  geom_quasirandom(groupOnX = FALSE, alpha = 0.5) +
+  theme_classic()
 
 ggplot(dat, aes(UMAP1, UMAP2)) +
   geom_point(alpha = 0.1) +
-  geom_smooth(data = dat[dat$branch == 1, ], aes(colour = 'red')) +
+  geom_point(data = dat[dat$branch == 1, ], aes(colour = 'red')) +
   geom_smooth(data = dat[dat$branch == 2, ], aes(colour = 'red')) +
   geom_smooth(data = dat[dat$branch == 3, ], aes(colour = 'red'))
 
-names(dpt$branch)
 
 
 head(dat)
@@ -109,11 +112,6 @@ ggplot(dm, aes(DC1,DC2,  colour = Clusters)) +
 
 
 plot(dpt, root = 1, paths_to = c(2,3), col_by = 'branch')
-
-df <- as.data.frame(cbind(DC1 = dm$DC1, DC2 = dm$DC2, DC3 = dm$DC3, Clusters))
-df
-plot_ly(x = df$DC1, y = df$DC2, z = df$DC3, 
-        color = df$Clusters, type = 'scatter3d', mode = 'markers', text = df$Clusters)
 
 
 
