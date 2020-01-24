@@ -3,9 +3,6 @@
 
 #Diffusion Pseutotime using the Destiny R Package
 
-install.packages('ggbeeswarm')
-library(ggbeeswarm)
-
 packages_1 <- c('cytofkit', 'flowViz', 'ggcyto', 'gridExtra','grid', 'ggplot2', 'flowCore',
                 'umap', 'dplyr', 'reshape', 'RColorBrewer', 'FlowSOM', 'Rtsne',
                 'ConsensusClusterPlus', 'ggdendro', 'plotly', 'shiny', 'plotly', 'destiny', 'Biobase', 'slingshot',
